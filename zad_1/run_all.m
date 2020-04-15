@@ -19,6 +19,8 @@ for i = 1:1:10
 
         iterations = k;
         funcount = eval(sprintf('optimValues%d.funccount',iterations));
+%         okazalo sie, ze nie ma na to miejsca na wykresie, a nie mam czasu kombinowac
+%         value = eval(sprintf('optimValues%d.fval',iterations));
 
         gradient = zeros(iterations+1,2);
         point = zeros(iterations+1,2);
@@ -28,7 +30,8 @@ for i = 1:1:10
         end
         stop = point(k,:);
 
-
+        fig = figure;
+        
         subplot(1,2,1);
         plot(point(:,1),point(:,2),'.');
         axis([-6 6 -6 6]);
@@ -46,6 +49,11 @@ for i = 1:1:10
         title('Gradient funkcji w  poszczególnych iteracjach');
 
         sgtitle(sprintf('Punkt pocz¹tkowy: x=%f, y=%f\nZnalezione optimum lokalne: x=%f, y=%f\nIloœæ iteracji: %d\nIloœæ obliczeñ funkcji celu: %d',start(1),start(2),stop(1),stop(2),iterations,funcount));
-        saveas(gcf,sprintf('wykres/Fminunc_%d_%d.png',i,j));
+%         saveas(gcf,sprintf('wykres/Fminunc_%d_%d.png',i,j));
     end
 end
+
+% fsurf(@(x,y) (x^2+y-11)^2+(x+y^2-7)^2)
+% saveas(gcf,'wykres/F_all.png');
+
+close all;

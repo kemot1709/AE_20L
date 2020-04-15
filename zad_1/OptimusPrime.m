@@ -1,4 +1,4 @@
-function [x,fval,exitflag,output,grad,hessian] = is_that_glock(x0)
+function [x,fval,exitflag,output,grad,hessian] = OptimusPrime(x0)
 %% This is an auto generated MATLAB file from Optimization Tool.
 
 %% Start with the default options

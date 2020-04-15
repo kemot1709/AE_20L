@@ -1,4 +1,3 @@
-
 for i = 1:1:10
     for j=1:1:1
         clearvars -except i j
@@ -8,11 +7,11 @@ for i = 1:1:10
         max = 6;
         start = [(max-min)*rand() + min,(max-min)*rand() + min];
 
-        [x,fval,exitflag,output,grad,hessian] = is_that_glock(start);
+        [x,fval,exitflag,output,grad,hessian] = OptimusPrime(start);
 
         k=0;
         pom = eval(sprintf('state%d',k));
-        while pom ~= 'done'
+        while pom ~= 'done' %#ok<BDSCA>
             k=k+1;
             pom = eval(sprintf('state%d',k));
         end

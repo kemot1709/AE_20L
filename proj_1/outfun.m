@@ -7,7 +7,6 @@ stop = false;
            history.fval = [];
            history.x = [];
            history.grad = [];
-           history.hessian = [];
            assignin('base', 'history', history);
        case 'iter'
            history = evalin('base', 'history');
@@ -18,9 +17,6 @@ stop = false;
            history.x = [history.x; x];
            if(isfield(optimValues,'gradient'))
                 history.grad = [history.grad; optimValues.gradient'];
-           end
-           if(isfield(optimValues,'hessian'))
-                history.hessian = [history.hessian; optimValues.hessian];
            end
            
            assignin('base', 'history', history);

@@ -34,7 +34,7 @@ function fig = plot_optimalization(input)
     
     grid on;
     xlabel('iteracja');
-    ylabel('watoœæ funkcji celu');
+    ylabel('wartoœæ funkcji celu');
     title('Wartoœæ funkcji celu w kolejnych iteracjach');
 end
 

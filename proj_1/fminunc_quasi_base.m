@@ -1,4 +1,4 @@
-function [x,fval,exitflag,output,grad,hessian] = fminunc_quasi_hess(x0,fun)
+function [x,fval,exitflag,output,grad,hessian] = fminunc_quasi_base(x0,fun)
 
 % Option settings
 options = optimoptions('fminunc');
@@ -11,6 +11,6 @@ options = optimoptions(options,'OutputFcn', { @outfun });
 
 % Specification of algorithm
 options = optimoptions(options,'Algorithm', 'quasi-newton');
-options = optimoptions(options,'SpecifyObjectiveGradient', true);
 
+% Launch fminunc
 [x,fval,exitflag,output,grad,hessian] = fminunc(fun,x0,options);

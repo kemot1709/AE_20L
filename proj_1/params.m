@@ -7,7 +7,6 @@ fun = @(x) (1-x(1)+a)^2 + 100*(x(2)-b-(x(1)-a)^2)^2;
 grad = @(x) [2 *(-1 - a + x(1) - 200 *(a - x(1)) *(a^2 + b - 2 *a* x(1) + x(1)^2 - x(2))), 200 *(-b - (a - x(1))^2 + x(2))];
 hess = @(x) [-400 *(-(x(1) - a)^2 - b + x(2)) + 800 *(x(1) - a)^2 + 2 , -400 *(x(1) - a);
 -400 *(x(1) - a) , 200];
-clearvars a b
 
 % Agregates for fmin functions
 fun_base = fun;
@@ -26,3 +25,6 @@ y_start = [0 -2 -2 0];
 
 % Czy zapisywaæ wykresy
 flag_save = 0;
+
+% Suppressed warnings
+warning('off','MATLAB:fplot:NotVectorized');

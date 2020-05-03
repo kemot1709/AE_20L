@@ -2,16 +2,21 @@ function fig = plot_optimalization(input)
 % Funkcja rysujaca wykresy minimalizacji funkcji
     fig(1) = figure;
     
-    topic = sprintf('Punkt pocz¹tkowy: x=%f, y=%f\nZnalezione optimum lokalne: x=%f, y=%f\nWartoœæ optimum lokalnego: f(x,y)=%f\nIloœæ iteracji: %d\nIloœæ obliczeñ funkcji celu: %d',input.x(1,1),input.x(1,2),input.x(end,1),input.x(end,2),input.fval(end),input.iter(end),input.funccount(end));
+    topic = sprintf('Punkt pocz¹tkowy: x=%f, y=%f\nZnalezione optimum lokalne: x=%f, y=%f\nWartoœæ optimum lokalnego: f(x,y)=%f\nIloœæ iteracji: %d Iloœæ obliczeñ funkcji celu: %d\n',input.x(1,1),input.x(1,2),input.x(end,1),input.x(end,2),input.fval(end),input.iter(end),input.funccount(end));
     if(isfield(input,'grad'))
         subplot(1,2,1);
     end
+    a = evalin('base', 'a');
+    b = evalin('base', 'b');
+    fcontour(@(x,y) (1-x+a)^2 + 100*(y-b-(x-a)^2)^2,'LevelStep',100);
+    hold on;
     plot_rainbow(input.x(:,1),input.x(:,2),'.');
-    
+    hold off;
+        
     % Dobrane pod rozwi¹zywany problem
-    axis([-3 3 -3 3]);
-    xticks(-3:1:3);
-    yticks(-3:1:3);
+    axis([-2.5 2.5 -2.5 2.5]);
+    xticks(-2.5:0.5:2.5);
+    yticks(-2.5:0.5:2.5);
     % 
     
     grid on;

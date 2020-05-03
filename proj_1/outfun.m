@@ -6,7 +6,9 @@ stop = false;
            history.funccount = [];
            history.fval = [];
            history.x = [];
-           history.grad = [];
+           if(isfield(optimValues,'gradient'))
+               history.grad = [];
+           end
            assignin('base', 'history', history);
        case 'iter'
            history = evalin('base', 'history');

@@ -1,9 +1,11 @@
 function fig = plot_optimalization(input)
 % Funkcja rysujaca wykresy minimalizacji funkcji
     fig(1) = figure;
-        
-    subplot(1,2,1);
-%     plot(input.x(:,1),input.x(:,2),'.');
+    
+    topic = sprintf('Punkt pocz¹tkowy: x=%f, y=%f\nZnalezione optimum lokalne: x=%f, y=%f\nWartoœæ optimum lokalnego: f(x,y)=%f\nIloœæ iteracji: %d\nIloœæ obliczeñ funkcji celu: %d',input.x(1,1),input.x(1,2),input.x(end,1),input.x(end,2),input.fval(end),input.iter(end),input.funccount(end));
+    if(isfield(input,'grad'))
+        subplot(1,2,1);
+    end
     plot_rainbow(input.x(:,1),input.x(:,2),'.');
     
     % Dobrane pod rozwi¹zywany problem
@@ -15,17 +17,20 @@ function fig = plot_optimalization(input)
     grid on;
     xlabel('x');
     ylabel('y');
-    title('Poszukiwane minimum');
+    if(isfield(input,'grad'))
+        title('Poszukiwane minimum');
 
-    subplot(1,2,2);
-%     plot(input.grad(:,1),input.grad(:,2),'-o');
-    plot_rainbow_line(input.grad(:,1),input.grad(:,2),'-o');
+        subplot(1,2,2);
+        plot_rainbow_line(input.grad(:,1),input.grad(:,2),'-o');
+
+        xlabel('\nablax');
+        ylabel('\nablay');
+        title('Gradient funkcji');
+        sgtitle(topic);
+    else
+        title(topic);
+    end
     
-    xlabel('\nablax');
-    ylabel('\nablay');
-    title('Gradient funkcji');
-
-    sgtitle(sprintf('Punkt pocz¹tkowy: x=%f, y=%f\nZnalezione optimum lokalne: x=%f, y=%f\nWartoœæ optimum lokalnego: f(x,y)=%f\nIloœæ iteracji: %d\nIloœæ obliczeñ funkcji celu: %d',input.x(1,1),input.x(1,2),input.x(end,1),input.x(end,2),input.fval(end),input.iter(end),input.funccount(end)));
 
     fig(2) = figure;
     semilogy(input.iter,input.fval,'d',...

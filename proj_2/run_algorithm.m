@@ -1,4 +1,4 @@
-% clear;
+clearvars -except fmin fmax favg fvar
 % close all;
 params;
 

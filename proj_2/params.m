@@ -7,38 +7,46 @@ N=32;
 items(:,1)=round(0.1+0.9*rand(N,1),1);
 items(:,2)=round(1+99*rand(N,1));
 
+% BARDZO WA¯NE !!!
+rng('shuffle');
+
 W = sum(items(:,1))*0.3;
 
 % Params of GA
-lb = zeros(1,N);
-ub = ones(1,N);
-inty = zeros(1,N);
-for i = 1:N
-    inty(i)=i;
-end
+% lb = zeros(1,N);
+% ub = ones(1,N);
+% inty = zeros(1,N);
+% for i = 1:N
+%     inty(i)=i;
+% end
+lb=[];ub=[];inty=[];
 
 % Options of GA
 options = optimoptions('ga');
 options = optimoptions(options, 'PopulationSize', 100);
-options = optimoptions(options, 'Generations', 1000);
+options = optimoptions(options, 'Generations', 200);
 options = optimoptions(options, 'OutputFcn', { @outfun });
 options = optimoptions(options, 'Display', 'off');
 options = optimoptions(options, 'CrossoverFraction', 1);
 options = optimoptions(options, 'TolFun', 1e-6);
 options = optimoptions(options, 'EliteCount', 1);
+options = optimoptions(options, 'PopulationType', 'bitstring');
 
-Sel_nr = 1;
+Sel_nr = 1;%1,3,4,5
 options = optimoptions(options, 'SelectionFcn', get_SelectionFcn(Sel_nr));
 
-% {'crossoverscattered'} for ga, {'crossoverintermediate'}* for gamultiobj | 'crossoverheuristic' | 'crossoversinglepoint' | 'crossovertwopoint' | 'crossoverarithmetic'
-options = optimoptions(options, 'CrossoverFcn', 'crossoverscattered');
+Cross_nr = 1;%1,4,5
+options = optimoptions(options, 'CrossoverFcn', get_CrossoverFcn(Cross_nr));
 
-% I tak nie dzia³a bo mam ograniczenia "integer constraints"
-% {'mutationgaussian'} for ga, {'mutationadaptfeasible'}* for gamultiobj | 'mutationuniform'
-% options = optimoptions(options, 'MutationFcn', 'mutationuniform');
+Mut_nr = 1;%1,2,3
+options = optimoptions(options, 'MutationFcn', get_MutationFcn(Mut_nr));
+
+chooser = get_SelectionFcn(Sel_nr);
+% chooser = get_CrossoverFcn(Cross_nr);
+% chooser = get_MutationFcn(Mut_nr);
 
 % Average params
-n = 10;
+n = 25;
 
 
 function out = get_SelectionFcn(n)
@@ -57,5 +65,41 @@ function out = get_SelectionFcn(n)
             out = 'selectionroulette';
         otherwise
             out = 'selectionstochunif';
+    end
+end
+
+function out = get_CrossoverFcn(n)
+% {'crossoverscattered'} for ga, {'crossoverintermediate'}* for gamultiobj | 'crossoverheuristic' | 'crossoversinglepoint' | 'crossovertwopoint' | 'crossoverarithmetic'
+
+    switch (n)
+        case 1
+            out = 'crossoverscattered';
+        case 2
+            out = 'crossoverintermediate';
+        case 3
+            out = 'crossoverheuristic';
+        case 4
+            out = 'crossoversinglepoint';
+        case 5
+            out = 'crossovertwopoint';
+        case 6
+            out = 'crossoverarithmetic';
+        otherwise
+            out = 'crossoverscattered';
+    end
+end
+
+function out = get_MutationFcn(n)
+% {'mutationgaussian'} for ga, {'mutationadaptfeasible'}* for gamultiobj | 'mutationuniform'
+
+    switch (n)
+        case 1
+            out = 'mutationgaussian';
+        case 2
+            out = 'mutationadaptfeasible';
+        case 3
+            out = 'mutationuniform';
+        otherwise
+            out = 'mutationgaussian';
     end
 end

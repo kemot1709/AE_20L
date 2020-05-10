@@ -12,15 +12,6 @@ rng('shuffle');
 
 W = sum(items(:,1))*0.3;
 
-% Params of GA
-% lb = zeros(1,N);
-% ub = ones(1,N);
-% inty = zeros(1,N);
-% for i = 1:N
-%     inty(i)=i;
-% end
-lb=[];ub=[];inty=[];
-
 % Options of GA
 options = optimoptions('ga');
 options = optimoptions(options, 'PopulationSize', 100);

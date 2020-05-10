@@ -12,7 +12,7 @@ if ~exist('best')
 end
 
 for i = 1:n
-    [X,FVAL,EXITFLAG,OUTPUT,~,~] = ga(@(x) fun(items,x,W), N,[],[],[],[],lb,ub,[], inty,options);
+    [X,FVAL,EXITFLAG,OUTPUT,~,~] = ga(@(x) fun(items,x,W), N,[],[],[],[],[],[],[], [],options);
 
     % GA warnings
     if EXITFLAG ~= 1
@@ -80,10 +80,4 @@ function out = fun(items,x,W)
     if sum(items(:,1).*x')-W>0
         out=0;
     end
-end
-
-% @(x) nonlinfun(items,x,W)
-function [c, ceq] = nonlinfun(items,x,W)
-    c = sum(items(:,1).*x')-W;
-    ceq=[];
 end

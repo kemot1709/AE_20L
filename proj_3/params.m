@@ -11,9 +11,9 @@ x(:,2)=A(:,1)*sin(angle)+A(:,2)*cos(angle);
 x=x+randn(1,2); 
 y=sign(A(:,2));
 
-theta = 0.5;
+theta = 0.05;
 
-w = [0 0];
+w = [1 -1];
 b = 0;
 r = max(sqrt(x(:,1).^2+x(:,2).^2));
 

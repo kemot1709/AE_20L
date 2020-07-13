@@ -31,5 +31,5 @@ function [fig, memory] = plotuj(x, y, w, b, n, memory, titel)
     memory(len+1).w = w;
     memory(len+1).b = b;
     plot(pom', pom2','Color',kolor(len+1),'DisplayName',sprintf("w = [%.4f, %.4f], b = %.4f",w(1,1),w(1,2),b));    
-    legend show
+    legend('show','Location', 'southoutside');
 end
